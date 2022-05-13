@@ -1,7 +1,7 @@
 #$ TITLE: Filter for JK Roma F5 with Orange 5 & 1300 mAh 6S
 #$ FIRMWARE_VERSION: 4.3
 #$ CATEGORY: FILTERS
-#$ STATUS: Personal
+#$ STATUS: COMMUNITY
 #$ KEYWORDS: rpm, DShot telemetry, filter, filters, normal, basic, default, betaflight
 #$ AUTHOR: Betaflight
 #$ DESCRIPTION: JK settings w good attenuation and 1.5 ms gyro delay
