@@ -1,0 +1,35 @@
+#$ TITLE: JK 5in Rates
+#$ FIRMWARE_VERSION: 4.3
+#$ FIRMWARE_VERSION: 4.4
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: RATES
+#$ STATUS: EXPERIMENTAL
+#$ KEYWORDS: rate, rates
+#$ AUTHOR: JK
+#$ DESCRIPTION: JK rates for 5 in, 3.5 in freestyle
+
+rateprofile 0
+
+# rateprofile 0
+set rateprofile_name = JK
+set thr_mid = 33
+set thr_expo = 35
+set roll_rc_rate = 20
+set pitch_rc_rate = 20
+set yaw_rc_rate = 23
+set roll_expo = 75
+set pitch_expo = 75
+set roll_srate = 90
+set pitch_srate = 90
+set yaw_srate = 40
+set throttle_limit_type = SCALE
+set throttle_limit_percent = 80
+
+rateprofile 1
+
+rateprofile 2
+
+rateprofile 3
+
+# restore original rateprofile selection
+rateprofile 0

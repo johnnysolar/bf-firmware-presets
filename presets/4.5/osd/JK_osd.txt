@@ -1,0 +1,34 @@
+#$ TITLE: JK HD OSD
+#$ FIRMWARE_VERSION: 4.4
+#$ FIRMWARE_VERSION: 4.5
+#$ CATEGORY: OSD
+#$ STATUS: EXPERIMENTAL
+#$ KEYWORDS:DJI, HD, HDOSD, OSD
+#$ AUTHOR: JK 
+
+#$ DESCRIPTION: John's HD OSD settings
+#$ DESCRIPTION: Intended to be used with DJI system using 16-9 aspect ratio.
+
+set osd_units = IMPERIAL
+set osd_warn_bitmask = 24575
+set osd_cap_alarm = 1300
+set osd_tim1 = 2562
+set osd_tim2 = 2563
+set osd_vbat_pos = 2048
+set osd_link_quality_pos = 2682
+set osd_rssi_dbm_pos = 2080
+set osd_tim_1_pos = 3151
+set osd_tim_2_pos = 3183
+set osd_flymode_pos = 3087
+set osd_gps_lon_pos = 2640
+set osd_gps_lat_pos = 2653
+set osd_gps_sats_pos = 2657
+set osd_home_dir_pos = 2074
+set osd_flight_dist_pos = 2625
+set osd_altitude_pos = 19503
+set osd_warnings_pos = 14645
+set osd_avg_cell_voltage_pos = 2675
+set osd_disarmed_pos = 2327
+set osd_flip_arrow_pos = 2394
+set osd_stat_bitmask = 163516
+set osd_displayport_device = MSP
