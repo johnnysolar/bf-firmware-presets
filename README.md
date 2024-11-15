@@ -2,14 +2,15 @@
 
 A simple way to configure your Betaflight Flight Controller Firmware settings.
 
-- [Introduction](https://github.com/betaflight/firmware-presets#introduction)
-- [Applying and using Presets](https://github.com/betaflight/firmware-presets#applying-and-using-presets)
-- [Providing feedback](https://github.com/betaflight/firmware-presets#providing-feedback)
-- [Custom sources](https://github.com/betaflight/firmware-presets#custom-sources)
-- [Creating new presets](https://github.com/betaflight/firmware-presets#creating-new-presets)
-- [Modifying existing presets](https://github.com/betaflight/firmware-presets#modifying-existing-presets)
-- [Preset specifications](https://github.com/betaflight/firmware-presets#preset-specifications)
-- [Credits](https://github.com/betaflight/firmware-presets#credits)
+- [Introduction](#introduction)
+- [Applying and using Presets](#applying-and-using-presets)
+- [Providing feedback](#providing-feedback)
+- [Custom sources](#custom-sources)
+- [Creating new presets](#creating-new-presets)
+- [Tips for preset authors](#tips-for-authors)
+- [Modifying existing presets](#modifying-existing-presets)
+- [Preset specifications](#preset-specifications)
+- [Credits](#credits)
 
 ## Introduction
 
@@ -90,6 +91,20 @@ Remember to include the pull request URL in the `Discussion` field.
 - should be responsive to feedback from users via comments to the originating PR
 - is responsible for maintaining compatibility with future Betaflight firmware releases
 
+## Tips for authors
+
+If you want to add your presets to the **official Betaflight Presets Repo**, and thinking to open your first Pull Request (PR), please consider the following tips and common mistakes:
+1. Do **not** include index files updates in the PR. You can run check.js locally or run indexer in a separate branch, or just don't `git add` it to the commit.
+2. Split the separate presets into separate PRs. Especially if your presets are not connected with each other.
+3. Don't create multiple PRs if you are just starting, start with just one PR. Check it time-to-time if there are any corrections suggested, wait for it to be merged and then proceed with the next presets you wanted to add.
+4. Make sure `#$ DESCRIPTION` explains nicely what the preset is doing. You can even include pictures of modes/osd if you use `#$ PARSER: MARKED`. User must know what he is getting.
+5. Always self-check your PR in the GitHub web-view. Do it **every** time when you make a new PR, or if you update it. Respect the review team. If you don't check the web-view of your PR upon updates, why would they check. The main thing to check in the web view: Files changed tab.
+6. Don't forget about `#$ DISCUSSION: link/to/your/pr`
+7. If you messed up your PR and would like to start from scratch, do **not** close your existing PR. You can alwas start from scratch without closing your PR. Just save your preset somewhere locally on your PC, then remove your local branch and create a branch with the same name. When you done adding your preset to the branch just force-push it to the `origin`. Your PR is connected with your branch name.
+8. Use indentation for the code inside `#$ OPTION` and `#$ OPTION_GROUP`. 4 spaces for each level of nesting (see examples below).
+
+And remember - a new preset file needs a new PR. Modification for the existing preset also requires a new PR.
+
 ## Modifying existing presets
 
 Presets may be modified, with or without permission of the author, by a subsequent pull request.
@@ -130,7 +145,7 @@ All field tags must be:
 | FORCE_OPTIONS_REVIEW | Opens a dialog advising the user to review the options if they have not done so before applying the Preset.|
 | INCLUDE | Inserts data from one or more separate Presets ahead of the CLI commands of this Preset.  Useful to enforce defaults ahead of your commands. See details below.|
 | OPTION | Commands within `OPTION` tags present the user with a checkbox to apply, or not apply, the enclosed commands.  The default check-box behaviour can be specified.  Each `OPTION` must have a unique name. For more info, [click here](https://github.com/betaflight/firmware-presets#OPTION). |
-| OPTION_GROUP | Text to appear before a group of Options. |
+| OPTION_GROUP | Text to appear before a group of Options. The group can be made mutually exclusive by prepending the (EXCLUSIVE) directive to the name of the group |
 | DISCLAIMER | Field containing text for a disclaimer. |
 | INCLUDE_DISCLAIMER | path to file containing text for a disclaimer, starting from `presets/`` |
 | WARNING | Field containing text for a warning. Intended to be a final dialog before accepting the Preset |
@@ -163,22 +178,22 @@ All field tags must be:
 <cli command n>
 
 #$ OPTION BEGIN (CHECKED): Region 1 name
-<cli command n + 1>
-<cli command n + 2>
-...
-<cli command m>
+    <cli command n + 1>
+    <cli command n + 2>
+    ...
+    <cli command m>
 #$ OPTION END
 
 #$ OPTION_GROUP BEGIN: This group name
-#$ OPTION BEGIN (UNCHECKED): Region 2 name
-<cli command m + 1>
-<cli command m + 2>
-#$ OPTION END
-#$ OPTION BEGIN (UNCHECKED): Region 3 name
-<cli command j + 1>
-<cli command j + 2>
-<cli command j + 3>
-#$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Region 2 name
+        <cli command m + 1>
+        <cli command m + 2>
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Region 3 name
+        <cli command j + 1>
+        <cli command j + 2>
+        <cli command j + 3>
+    #$ OPTION END
 #$ OPTION_GROUP END
 ```
 
@@ -254,19 +269,31 @@ Options can be 'grouped' under a 'title' or 'group name' using this syntax:
 
 ```
 #$ OPTION_GROUP BEGIN: your group name
-<options>
+    <options>
 #$ OPTION_GROUP END
 ````
 
 Complete `OPTION` example syntax looks like this:
 ```
 #$ OPTION_GROUP BEGIN: this group name
-#$ OPTION BEGIN (UNCHECKED): <Option1 name>
-CLI payload strings
-#$ OPTION END
-#$ OPTION BEGIN (UNCHECKED): <Option2 name>
-CLI payload strings
-#$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): <Option1 name>
+        CLI payload strings
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): <Option2 name>
+        CLI payload strings
+    #$ OPTION END
+#$ OPTION_GROUP END
+```
+
+You can also make a set of options mutually exclusive, i.e. only one option can be checked within the group at once.
+```
+#$ OPTION_GROUP BEGIN: (EXCLUSIVE) A Mutually Exclusive set of options
+    #$ OPTION BEGIN (UNCHECKED): Option the first
+        CLI payload strings
+    #$ OPTION END
+    #$ OPTION BEGIN (UNCHECKED): Other option that might conflict with the first
+        CLI payload strings
+    #$ OPTION END
 #$ OPTION_GROUP END
 ```
 
