@@ -1,6 +1,8 @@
 #$ TITLE: TBS Unify Pro HV Race (Not Race V2) - SA 2.0
 #$ FIRMWARE_VERSION: 4.2
 #$ FIRMWARE_VERSION: 4.3
+#$ FIRMWARE_VERSION: 4.4
+#$ FIRMWARE_VERSION: 4.5
 #$ CATEGORY: VTX
 #$ STATUS: COMMUNITY
 #$ KEYWORDS:  vtx, vtx table, tbs, unify pro, HV, SA 2.0
